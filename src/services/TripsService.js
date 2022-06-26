@@ -1,0 +1,25 @@
+import { AppState } from "../AppState";
+
+class TripsService {
+  addTrip() {
+    const trip = new Date().toLocaleString()
+    AppState.trips = [...AppState.trips, trip]
+    this.saveLocal()
+  }
+  saveLocal() {
+    // Save the current Appstate into local storage
+    localStorage.setItem('gas-logger', JSON.stringify({
+      trips: AppState.trips
+    }))
+  }
+  loadLocal() {
+    // get data from local storage by same name saved
+    let data = JSON.parse(localStorage.getItem('gas-logger'))
+    console.log('loaded data', data)
+    // check for if data exists, cause we only want to try this if it does, will error otherwise
+    if (data != null) {
+      AppState.trips = data.trips.map(t => new Date(t).toLocaleString())
+    }
+  }
+}
+export const tripsService = new TripsService()
