@@ -1,9 +1,21 @@
 import { AppState } from "../AppState";
+import { Trip } from "../models/Trip";
+import { logger } from "../utils/Logger";
 
 class TripsService {
   addTrip() {
-    const trip = new Date().toLocaleString()
+    const trip = new Trip({ dateTime: new Date().toLocaleString() })
     AppState.trips = [...AppState.trips, trip]
+    this.saveLocal()
+  }
+  checkTrip(id) {
+    const trip = AppState.trips.find(t => t.id == id)
+    trip.complete = !trip.complete
+    this.saveLocal()
+  }
+  deleteTrip(id) {
+    const index = AppState.trips.findIndex(t => t.id == id)
+    AppState.trips.splice(index, 1)
     this.saveLocal()
   }
   saveLocal() {
@@ -18,7 +30,7 @@ class TripsService {
     console.log('loaded data', data)
     // check for if data exists, cause we only want to try this if it does, will error otherwise
     if (data != null) {
-      AppState.trips = data.trips.map(t => new Date(t).toLocaleString())
+      AppState.trips = data.trips.map(t => new Trip(t))
     }
   }
 }
