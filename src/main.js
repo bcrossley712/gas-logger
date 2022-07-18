@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp } from '../node_modules/vue/dist/vue'
 // @ts-ignore
 import App from './App.vue'
 import { registerGlobalComponents } from './registerGlobalComponents'
