@@ -1,5 +1,5 @@
-import { createApp } from '../node_modules/vue/dist/vue.d.ts'
-// @ts-ignore
+import { createApp } from 'vue'
+
 import App from './App.vue'
 import { registerGlobalComponents } from './registerGlobalComponents'
 import { router } from './router'
