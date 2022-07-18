@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from '../node_modules/vue-router/dist/vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { authGuard } from '@bcwdev/auth0provider-client'
 
 function loadPage(page) {
