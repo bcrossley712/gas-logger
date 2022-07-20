@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h3>Joe gas keeper</h3>
+        <h3>Joe gas logger</h3>
       </div>
     </router-link>
     <button
