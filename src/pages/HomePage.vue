@@ -3,19 +3,12 @@
     <div class="row">
       <div class="col-12 p-3">
         <button class="btn btn-success me-3" @click="addTrip">Add trip</button>
+        <button class="btn btn-success me-3" @click="halfTrip">
+          Half Trip
+        </button>
         <span class="me-3">Trips = {{ trips?.length }}</span>
-        <span>Peyton owes = ${{ unpaidTrips?.length * 2 }}</span>
+        <span>Peyton owes = ${{ unpaidTrips }}</span>
       </div>
-      <!-- <div class="col-12">
-        <div v-for="t in trips" :key="t">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="" />
-            <label class="form-check-label" for="">
-              {{ t }}
-            </label>
-          </div>
-        </div>
-      </div> -->
       <div class="col-12">
         <div class="d-flex align-items-center p-2" v-for="t in trips" :key="t">
           <div class="form-check form-check-inline">
@@ -73,11 +66,28 @@ export default {
     });
     return {
       trips: computed(() => AppState.trips),
-      unpaidTrips: computed(() =>
-        AppState.trips.filter((t) => t.complete == false)
-      ),
+      unpaidTrips: computed(() => {
+        const fullTrip =
+          AppState.trips.filter(
+            (t) => t.complete == false && t.halfTrip == false
+          ).length * 2;
+        const halfTrip = AppState.trips.filter(
+          (t) => t.complete == false && t.halfTrip == true
+        ).length;
+        return fullTrip + halfTrip;
+      }),
       addTrip() {
-        tripsService.addTrip();
+        const trip = {
+          dateTime: new Date().toLocaleString(),
+        };
+        tripsService.addTrip(trip);
+      },
+      halfTrip() {
+        const trip = {
+          dateTime: new Date().toLocaleString(),
+          halfTrip: true,
+        };
+        tripsService.addTrip(trip);
       },
       checkTrip(id) {
         tripsService.checkTrip(id);

@@ -4,6 +4,7 @@ export class Trip {
     this.id = data.id || generateId()
     this.dateTime = data.dateTime
     this.complete = data.complete || false
+    this.halfTrip = data.halfTrip || false
   }
 
 }

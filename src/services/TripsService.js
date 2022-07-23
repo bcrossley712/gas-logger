@@ -3,8 +3,8 @@ import { Trip } from "../models/Trip";
 import { logger } from "../utils/Logger";
 
 class TripsService {
-  addTrip() {
-    const trip = new Trip({ dateTime: new Date().toLocaleString() })
+  addTrip(data) {
+    const trip = new Trip(data)
     AppState.trips = [...AppState.trips, trip]
     this.saveLocal()
   }
